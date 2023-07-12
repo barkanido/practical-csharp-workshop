@@ -72,6 +72,6 @@ class FizzBuzz : IEquatable<FizzBuzz>
 
     public override string ToString()
     {
-        return $"FizzBuzz[fizz={Message3}, buzz={Message7}]";
+        return $"{nameof(FizzBuzz)}[fizz={Message3}, buzz={Message7}]";
     }
 }
