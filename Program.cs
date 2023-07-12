@@ -15,15 +15,34 @@
             Message3 = "Fizz",
             Message7 = "Buzz"
         };
+        Console.WriteLine($"starting {fizzBuzz}");
         fizzBuzz.Run(n);
     }
 }
 
-class FizzBuzz
+class FizzBuzz : IEquatable<FizzBuzz>
 {
     public required string Message3 { get; init; }
     public required string Message7 { get; init; }
 
+    public bool Equals(FizzBuzz? other)
+    {
+        return other switch {
+            null => false,
+            _ => Message3 == other.Message3 && Message7 == other.Message7,
+        };
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is FizzBuzz other){
+            return Equals(other);
+        }
+        return false;
+    }
+
+    public override int GetHashCode()
+        => HashCode.Combine(Message3, Message7);
 
     public void Run(int n)
     {
@@ -49,5 +68,10 @@ class FizzBuzz
                 Console.WriteLine();
             }
         }
+    }
+
+    public override string ToString()
+    {
+        return $"FizzBuzz[fizz={Message3}, buzz={Message7}]";
     }
 }
